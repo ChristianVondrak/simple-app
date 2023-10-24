@@ -2,7 +2,7 @@
 FROM node:18-alpine as deps
 WORKDIR /app
 
-COPY package.json package.lock.json ./
+COPY package.json package-lock.json ./
 RUN npm install
 
 
@@ -18,7 +18,7 @@ RUN npm run build
 FROM node:18-alpine as runner
 WORKDIR /app
 
-COPY package.json package.lock.json ./
+COPY package.json package-lock.json ./
 RUN npm install --only=prod
 COPY --from=builder /app/dist ./dist
 
