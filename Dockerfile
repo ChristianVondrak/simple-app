@@ -13,6 +13,7 @@ COPY --from=deps /app/node_modules ./node_modules
 
 COPY . .
 RUN npm install -g @nestjs/cli
+RUN npm install
 RUN nest build
 
 # Etapa de Producción
