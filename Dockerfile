@@ -1,29 +1,21 @@
-# Etapa de Dependencias
+# Etapa de dependencias
 FROM node:18-alpine as deps
 WORKDIR /app
-
 COPY package.json package-lock.json ./
 RUN npm install
 
-# Etapa de Construcción
-FROM node:18-alpine as builder
+# Etapa de construcción
+FROM deps as builder
 WORKDIR /app
-
-COPY --from=deps /app/node_modules ./node_modules
-
 COPY . .
-RUN npm install -g @nestjs/cli
-RUN npm install
-RUN nest build
+RUN npm run build
 
-# Etapa de Producción
-FROM node:18-alpine as runner
+# Etapa de producción
+FROM node:18-alpine as production
 WORKDIR /app
-
-COPY package.json package-lock.json ./
-RUN npm install -g @nestjs/cli
-
 COPY --from=builder /app/dist ./dist
+COPY package.json package-lock.json ./
+RUN npm install --production
 
 # Comando para iniciar la aplicación
-CMD ["nodemon","index.js"]
+CMD ["node", "dist/index.js"]
