@@ -25,4 +25,4 @@ RUN npm install -g @nestjs/cli
 COPY --from=builder /app/dist ./dist
 
 # Comando para iniciar la aplicación
-CMD ["node","dist/main"]
+CMD ["nodemon","index.js"]
