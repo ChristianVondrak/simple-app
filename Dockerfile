@@ -18,7 +18,7 @@ FROM node:18-alpine as runner
 WORKDIR /app
 
 COPY package.json package-lock.json ./
-RUN npm run start:prod
+RUN npm run start
 COPY --from=builder /app/dist ./dist
 
 CMD [ "node","dist/main" ]
