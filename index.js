@@ -65,7 +65,7 @@ api.get('/directories/:id', (req, res) => {
     }
 });
 
-//ACTUALIZACION DE DATOS
+//Se actualizan los datos
 
 api.put('/directories/:id', (req, res) => {
     const id = req.params.id;
