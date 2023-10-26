@@ -1,16 +1,17 @@
-version: '3.9'
+version: "3.9"
 
 services:
-
-  postgres-db:
-    image: 'node:18.0.0-alpine'
-    restart: always
-
-  cnp2-app:
-    image: christianvondrak/simple-app:latest
-    restart: always
+  node-js:
+    image: node:18
+    build: .
+    volumes:
+      - ./:/app
     ports:
-      - 8888:8888
+      - "8888:8888"
+    environment:
+      - NODE_ENV=development
 
 networks:
-  cnp2_net:
+  default:
+    name: cnp2_net
+
