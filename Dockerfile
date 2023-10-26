@@ -3,6 +3,7 @@ FROM node:18-alpine as deps
 WORKDIR /app
 
 COPY package.json package-lock.json ./
+COPY dummy.js index.js ./
 RUN npm install
 
 
@@ -19,7 +20,8 @@ FROM node:18-alpine as runner
 WORKDIR /app
 
 COPY package.json package-lock.json ./
-RUN npm install --only=prod
+COPY dummy.js index.js ./
 COPY --from=builder /app/dist ./dist
+RUN npm install
 
 CMD ["npm", "run", "start"]
