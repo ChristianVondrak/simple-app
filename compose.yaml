@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+
+  postgres-db:
+    image: 'node:18.0.0-alpine'
+    restart: always
+
+  cnp2-app:
+    image: christianvondrak/simple-app:latest
+    restart: always
+    ports:
+      - 8888:8888
+
+networks:
+  cnp2_net:
