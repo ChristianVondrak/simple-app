@@ -1,17 +1,14 @@
-version: "3.9"
+version: '3.9'
 
 services:
-  node-js:
-    image: node:18
+
+  cnp2-app:
     build: .
-    volumes:
-      - ./:/app
+    restart: always
     ports:
-      - "8888:8888"
-    environment:
-      - NODE_ENV=development
+      - 8083:8000
 
 networks:
-  default:
-    name: cnp2_net
+
+  cnp2_net:
 
